@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ProjetPruvost</string>
+    <string name="hint">Entrez votre texte ici</string>
+
+    <string name="but_nettoyer">Nettoyer</string>
+    <string name="but_retourner">Retourner</string>
+    <string name="but_comparer">Comparer</string>
+
+    <string name="menu_palin_alea">Palindrome aléatoire</string>
+    <string name="menu_est_ce_palin">Est-ce un palindrome ?</string>
+    <string name="menu_palin_perec">Le palindrome de Perec</string>
+    <string name="menu_voir_palin_perec">Voir le palindrome de Perec</string>
+    <string name="menu_apropos">A propos de &#8230;</string>
+</resources>
