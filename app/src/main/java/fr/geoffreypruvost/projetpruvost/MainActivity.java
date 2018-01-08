@@ -31,6 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickNettoyer(View v){
         String clean_str = Normalizer.normalize(editText.getText(), Normalizer.Form.NFD);
-        tvNettoyage.setText(clean_str.replaceAll("[^\\p{ASCII}]", ""));
+        tvNettoyage.setText(clean_str.replaceAll("[^\\p{ASCII}]", "").toLowerCase().replaceAll(" ",""));
     }
 }
