@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText editText;
     private TextView tvNettoyage;
+    private TextView tvReversed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.edit_text);
         tvNettoyage = findViewById(R.id.clean_str);
+        tvReversed = findViewById(R.id.swapped_str);
     }
 
     @Override
@@ -32,5 +34,9 @@ public class MainActivity extends AppCompatActivity {
     public void onClickNettoyer(View v){
         String clean_str = Normalizer.normalize(editText.getText(), Normalizer.Form.NFD);
         tvNettoyage.setText(clean_str.replaceAll("[^\\p{ASCII}]", "").toLowerCase().replaceAll(" ",""));
+    }
+
+    public void onClickReverseStr(View v){
+        tvReversed.setText(new StringBuilder(tvNettoyage.getText()).reverse().toString());
     }
 }
