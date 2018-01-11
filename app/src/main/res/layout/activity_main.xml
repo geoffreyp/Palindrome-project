@@ -53,6 +53,7 @@
             android:onClick="onClickReverseStr"
             android:layout_weight="1"/>
         <Button
+            android:onClick="onClickCompare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/but_comparer"
