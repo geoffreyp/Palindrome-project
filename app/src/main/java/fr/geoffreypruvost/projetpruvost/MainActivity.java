@@ -49,19 +49,25 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_palin_alea:
                 try {
-                    List<String> palindromes = palindromes = Helper.getAllPalindromes(new InputStreamReader(getAssets().open("palindromes.txt")));
-                    int alea = (int)(Math.random() * (palindromes.size()-1));
-
-                    System.out.println(alea);
-                    System.out.println(palindromes.size());
-                    String palin = palindromes.get(alea);
+                    List<String> palindromes = Helper.getAllPalindromes(new InputStreamReader(getAssets().open("palindromes.txt")));
+                    String palin = palindromes.get((int)(Math.random() * (palindromes.size()-1)));
 
                     editText.setText(palin);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
+                break;
 
+            case R.id.menu_est_ce_palin:
+                try {
+                    List<String> palindromes = Helper.getAllPalindromes(new InputStreamReader(getAssets().open("estcepalindromes.txt")));
+                    String palin = palindromes.get((int)(Math.random() * (palindromes.size()-1)));
+
+                    editText.setText(palin);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 break;
             default:
