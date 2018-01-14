@@ -6,12 +6,18 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.Normalizer;
+import java.util.List;
+
+import fr.geoffreypruvost.projetpruvost.helper.Helper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvReversed;
     private SpannableString ssClean;
     private SpannableString ssReversed;
+
+    /* Override methods */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +44,34 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_palin_alea:
+                try {
+                    List<String> palindromes = palindromes = Helper.getAllPalindromes(new InputStreamReader(getAssets().open("palindromes.txt")));
+                    int alea = (int)(Math.random() * (palindromes.size()-1));
+
+                    System.out.println(alea);
+                    System.out.println(palindromes.size());
+                    String palin = palindromes.get(alea);
+
+                    editText.setText(palin);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
+    }
+
+    /* on click methods */
     public void onClickNettoyer(View v){
         String clean_str = Normalizer.normalize(editText.getText(), Normalizer.Form.NFD);
         clean_str = clean_str.replaceAll("[^\\p{ASCII}]", ""); // remove accents
