@@ -1,6 +1,9 @@
 package fr.geoffreypruvost.projetpruvost;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -68,7 +71,23 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                break;
+            case R.id.menu_a_propos:
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setTitle("A propos de ...");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder1.setView(R.layout.activity_apropos);
+                }
+                builder1.setCancelable(true);
+                builder1.setNeutralButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
 
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
                 break;
             default:
                 return super.onOptionsItemSelected(item);

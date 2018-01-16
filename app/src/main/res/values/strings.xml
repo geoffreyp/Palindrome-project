@@ -11,4 +11,7 @@
     <string name="menu_palin_perec">Le palindrome de Perec</string>
     <string name="menu_voir_palin_perec">Voir le palindrome de Perec</string>
     <string name="menu_apropos">A propos de &#8230;</string>
+    <string name="palindrome">Palindrome</string>
+    <string name="version">Version 1.0 du 16/01/2018</string>
+    <string name="copyright">Copyright LISIC/LMPA 2018</string>
 </resources>
