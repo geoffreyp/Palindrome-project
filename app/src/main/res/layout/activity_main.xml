@@ -58,6 +58,13 @@
             android:layout_height="wrap_content"
             android:text="@string/but_comparer"
             android:layout_weight="1"/>
+
+        <Button
+            android:onClick="onClickVerifRapide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/verif_rapide"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </LinearLayout>

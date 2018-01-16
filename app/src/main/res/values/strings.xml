@@ -14,4 +14,5 @@
     <string name="palindrome">Palindrome</string>
     <string name="version">Version 1.0 du 16/01/2018</string>
     <string name="copyright">Copyright LISIC/LMPA 2018</string>
+    <string name="verif_rapide">Verif rapide</string>
 </resources>

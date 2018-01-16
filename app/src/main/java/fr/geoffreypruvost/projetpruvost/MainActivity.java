@@ -113,38 +113,75 @@ public class MainActivity extends AppCompatActivity {
         ssReversed = new SpannableString(tvReversed.getText());
 
         if(tvNettoyage.getText().length() > 0 && tvReversed.getText().length() > 0) {
-            new Thread(new ComparePalin()).start();
+            new Thread(new ComparePalin(true)).start();
         }else {
             Toast.makeText(this,"Veuillez nettoyer et retourner le texte",Toast.LENGTH_SHORT).show();
         }
     }
 
+    public void  onClickVerifRapide(View v){
+        ssClean = new SpannableString(tvNettoyage.getText());
+        if(tvNettoyage.getText().length() > 0) {
+            new Thread(new ComparePalin(false)).start();
+        }else {
+            Toast.makeText(this,"Veuillez nettoyer le texte",Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     class ComparePalin implements Runnable{
+        private boolean slowverif = false;
+
+        ComparePalin(boolean slow){
+            this.slowverif = slow;
+        }
 
         @Override
         public void run() {
+            if(slowverif) {
+                for (int i = 0; i < tvNettoyage.getText().length() && i < tvReversed.getText().length(); i++) {
 
-            for (int i = 0; i < tvNettoyage.getText().length() && i < tvReversed.getText().length(); i++){
+                    if (tvReversed.getText().charAt(i) == tvNettoyage.getText().charAt(i)) {
+                        ssClean.setSpan(new BackgroundColorSpan(Color.GREEN), 0, i + 1, 0);
+                        ssReversed.setSpan(new BackgroundColorSpan(Color.GREEN), 0, i + 1, 0);
 
-                if(tvReversed.getText().charAt(i) == tvNettoyage.getText().charAt(i)) {
-                    ssClean.setSpan(new BackgroundColorSpan(Color.GREEN), 0,i+1,0);
-                    ssReversed.setSpan(new BackgroundColorSpan(Color.GREEN), 0,i+1,0);
+                    } else {
+                        ssClean.setSpan(new BackgroundColorSpan(Color.RED), i, i + 1, 0);
+                        ssReversed.setSpan(new BackgroundColorSpan(Color.RED), i, i + 1, 0);
+                        setText(tvNettoyage, ssClean);
+                        setText(tvReversed, ssReversed);
+                        break;
+                    }
 
-                }else{
-                    ssClean.setSpan(new BackgroundColorSpan(Color.RED), i,i+1,0);
-                    ssReversed.setSpan(new BackgroundColorSpan(Color.RED), i,i+1,0);
                     setText(tvNettoyage, ssClean);
                     setText(tvReversed, ssReversed);
-                    break;
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        System.err.println(e);
+                    }
                 }
+            }else{
+                for (int i = 0; i < tvNettoyage.getText().length(); i++) {
+                    int inversed = tvNettoyage.getText().length() - i - 1;
+                    if (tvNettoyage.getText().charAt(i) == tvNettoyage.getText().charAt(inversed)) {
+                        ssClean.setSpan(new BackgroundColorSpan(Color.GREEN), 0, i + 1, 0);
+                        ssClean.setSpan(new BackgroundColorSpan(Color.GREEN), inversed, tvNettoyage.getText().length(), 0);
+                        setText(tvNettoyage, ssClean);
+                    } else {
+                        ssClean.setSpan(new BackgroundColorSpan(Color.RED), i, i + 1, 0);
+                        ssClean.setSpan(new BackgroundColorSpan(Color.RED), inversed, inversed+1    , 0);
 
-                setText(tvNettoyage, ssClean);
-                setText(tvReversed, ssReversed);
-                try {
-                    Thread.sleep(200);
-                }catch (InterruptedException e){
-                    System.err.println(e);
+                        setText(tvNettoyage, ssClean);
+                        break;
+                    }
+
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        System.err.println(e);
+                    }
+
                 }
             }
         }
